@@ -1,0 +1,484 @@
+<div id="mint">
+  <div class="gif">
+    <img class="gif" src="http://satoshiflowers.art/wp-content/uploads/2022/04/gif-mint.gif" width="25%" />
+  </div>
+  <div id="mint-grid" >
+    <div class="column1">
+      <div class="underline1"> Private Sale</div>
+      <div class="description">Mint price: 0.025 ETH</div>
+      <div class="description">Max mint: 3</div>
+    </div>
+
+    <div class="column2">
+      <div class="underline2">Public sale</div>
+      <div class="description" >Mint price: 0.03 ETH</div>
+      <div class="description" >Max mint: 5</div>
+    </div>
+  </div>
+  <div class="tab-nav">
+    <div class="tabs">
+      <div id="tab-public-mint" class="tab selected">Public Mint</div>
+      <div id="tab-private-mint" class="tab disabled">Private Mint</div>
+      <div id="tab-free-mint" class="tab disabled">Free Mint</div>
+    </div>
+    <div class="qty-selector">
+      <div class="minus">-</div>
+      <div class="qty">5</div>
+      <div class="plus">+</div>
+    </div>
+    <div class="mint-btn-container">
+      <div role="button" class="mint-btn">Mint</div>
+    </div>
+  </div>
+  <div class="meta-connect">
+    <div class="meta-btn-container">
+      <div role="button" class="mint-btn">Connect Metamask</div>
+    </div>
+
+  </div>
+</div>
+<div id="loading-overlay">
+  <div class="loading">
+    Loading
+    <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+  </div>
+</div>
+<style>
+    #loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+    #loading-overlay .loading {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #fff;
+        font-size: 22pt;
+    }
+    .lds-default {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }
+    .lds-default div {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #fff;
+        border-radius: 50%;
+        animation: lds-default 1.2s linear infinite;
+    }
+    .lds-default div:nth-child(1) {
+        animation-delay: 0s;
+        top: 37px;
+        left: 66px;
+    }
+    .lds-default div:nth-child(2) {
+        animation-delay: -0.1s;
+        top: 22px;
+        left: 62px;
+    }
+    .lds-default div:nth-child(3) {
+        animation-delay: -0.2s;
+        top: 11px;
+        left: 52px;
+    }
+    .lds-default div:nth-child(4) {
+        animation-delay: -0.3s;
+        top: 7px;
+        left: 37px;
+    }
+    .lds-default div:nth-child(5) {
+        animation-delay: -0.4s;
+        top: 11px;
+        left: 22px;
+    }
+    .lds-default div:nth-child(6) {
+        animation-delay: -0.5s;
+        top: 22px;
+        left: 11px;
+    }
+    .lds-default div:nth-child(7) {
+        animation-delay: -0.6s;
+        top: 37px;
+        left: 7px;
+    }
+    .lds-default div:nth-child(8) {
+        animation-delay: -0.7s;
+        top: 52px;
+        left: 11px;
+    }
+    .lds-default div:nth-child(9) {
+        animation-delay: -0.8s;
+        top: 62px;
+        left: 22px;
+    }
+    .lds-default div:nth-child(10) {
+        animation-delay: -0.9s;
+        top: 66px;
+        left: 37px;
+    }
+    .lds-default div:nth-child(11) {
+        animation-delay: -1s;
+        top: 62px;
+        left: 52px;
+    }
+    .lds-default div:nth-child(12) {
+        animation-delay: -1.1s;
+        top: 52px;
+        left: 62px;
+    }
+    @keyframes lds-default {
+        0%, 20%, 80%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+    }
+    .tab-nav {
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        display: none;
+    }
+
+    .tab-nav .tabs {
+        display: flex;
+        flex-direction: row;
+        font-size: 24px;
+        gap: 40px;
+        cursor: pointer;
+    }
+
+    .tab-nav .tabs .tab.selected {
+        text-decoration: underline;
+    }
+
+    .tab-nav .tabs .tab.disabled {
+        color: #888;
+        cursor: not-allowed;
+    }
+
+    #mint-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        font-family: "8bit madness", Sans-serif;
+        width:500px;
+        justify-content: center;
+    }
+
+    #mint-grid .column1 {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+        flex: 1;
+        align-items: center;
+    }
+
+    #mint-grid .column2 {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+        flex: 1;
+        align-items: center;
+    }
+
+    #mint-grid .underline1 {
+        text-decoration: underline;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size:25px;
+    }
+    #mint-grid .underline2 {
+        text-decoration: underline;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size:25px;
+    }
+
+    #mint-grid .description {
+        font-size:24px;
+    }
+
+    #mint {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "8bit madness", Sans-serif;
+        font-size:4em;
+        justify-content: center;
+        padding-bottom: 200px;
+    }
+
+    #mint * {
+        user-select: none;
+    }
+
+    #mint .gif {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1%;
+    }
+
+    #mint .preview {
+        width: 20px;
+    }
+
+    #mint .qty {
+        font-size:0.7em;
+        margin-top:3%;
+        padding-right:5%;
+        padding-left:5%;
+    }
+
+    #mint .qty-selector {
+        display: flex;
+        margin-top:3%;
+        align-items: center;
+    }
+
+    #mint .qty-selector .minus {
+        padding-left: 15px;
+        padding-right: 15px;
+        border: 5px solid black;
+        cursor: pointer;
+        background-color:#F98DB2;
+        margin-left: -7%;
+        display: flex;
+        height: 70px;
+        align-items: center;
+    }
+
+    #mint .qty-selector .qty {
+        padding: 5px 5px;
+        margin: 5%
+    }
+
+    #mint .qty-selector .plus {
+        padding-left: 15px;
+        padding-right: 15px;
+        border: 5px solid black;
+        cursor: pointer;
+        background-color:#F98DB2;
+        display: flex;
+        height: 70px;
+        align-items: center;
+    }
+
+    #mint .mint-btn-container, #mint .meta-btn-container {
+        margin-top:2%;
+        border: 15px solid black;
+        cursor: pointer;
+        background-color: #3DA0EC;
+        color:white;
+        padding-right: 1em;
+        padding-left: 1em;
+        font-size: 30px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        #mint-grid {
+            flex-direction: column;
+            width: 250px;
+        }
+    }
+</style>
+
+<script>
+  function setLoading(isLoading) {
+    const loading = document.querySelector('#loading-overlay');
+    loading.style.display = (isLoading) ? 'flex' : 'none';
+    document.body.style.overflowY = (isLoading) ? 'hidden' : 'initial';
+  }
+
+  async function setLink(hash) {
+    document.querySelector('#link-container').innerHTML = `<a href="https://etherscan.io/tx/${hash}>See your transaction on Etherscan</a>`;
+    document.querySelector('#link-container').style.display = 'block';
+  }
+
+  async function login() {
+    setLoading(true);
+    await loadAbi();
+    if (window.ethereum === undefined) {
+      console.log('No Metamask');
+      return;
+    }
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    if (accounts.length === 0) {
+      console.log('no account selected');
+      return;
+    }
+    await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{
+        chainId: String('0x4')
+      }] });
+
+    address = accounts[0];
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    provider.on('block', console.log);
+    signer = provider.getSigner();
+    console.log({signer});
+    contract = new ethers.Contract('0xA9cAfA3a18d21fC90784eFacd0aF655c8b08A88d', abi, signer)
+    await authenticateMetamask();
+    setLoading(false);
+  }
+
+  async function authenticateMetamask() {
+    if (!provider || !signer) return;
+    const message = 'Let me mint!';
+    const signature = await signer.signMessage(message);
+    const response = await fetch('https://api.satoshiflowers.art/rank', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        address,
+        signature,
+        message
+      })
+    });
+    rank = await response.json();
+    if (!rank.success) return;
+    document.querySelector('#mint .meta-connect').style.display = 'none';
+    document.querySelector('#mint .tab-nav').style.display = 'flex';
+    if (rank.freeMint) {
+      document.querySelector('#tab-free-mint').classList.remove('disabled');
+    }
+    if (rank.privateMint) {
+      document.querySelector('#tab-private-mint').classList.remove('disabled');
+    }
+  }
+
+  async function mint(qty) {
+    setLoading(true);
+    let tx = null;
+    switch (tabSelected) {
+      case 'public-mint':
+        tx = await publicMint(qty);
+        break;
+      case 'private-mint':
+        tx = await privateMint(qty);
+        break;
+      case 'free-mint':
+        tx = await freeMint();
+        break;
+      default:
+        break;
+    }
+    if (tx !== null) {
+      setLink(tx.hash)
+    }
+    setLoading(false);
+  }
+
+  async function publicMint(qty) {
+    const tx = await contract.publicMint(qty, {
+      value: ethers.utils.parseEther('0.03').mul(qty)
+    });
+    await tx.wait();
+  }
+
+  async function privateMint(qty) {
+    const tx = await contract.privateMint(qty, rank.privateMint, {
+      value: ethers.utils.parseEther('0.025').mul(qty)
+    });
+    await tx.wait();
+  }
+
+  async function freeMint() {
+    const tx = await contract.freeMint(rank.freeMint);
+    await tx.wait();
+  }
+
+  async function loadAbi() {
+    const response = await fetch('https://api.satoshiflowers.art/abi');
+    abi = await response.json();
+  }
+
+  function selectTab(tab) {
+    const selectedTab = document.querySelector(`#tab-${tab}`);
+    if (selectedTab.classList.contains('disabled')) return;
+    const tabs = document.querySelectorAll('#mint .tab-nav .tabs .tab');
+    for (const tab of tabs) {
+      tab.classList.remove('selected');
+    }
+    selectedTab.classList.add('selected');
+    const qty = document.querySelector('#mint .qty');
+
+    tabSelected = tab;
+    if (tab === 'free-mint') {
+      maxMint = 1;
+      document.querySelector('#mint .tab-nav .qty-selector').style.display = 'none';
+    }
+
+    if (tab === 'public-mint') {
+      maxMint = 5;
+      document.querySelector('#mint .tab-nav .qty-selector').style.display = 'flex';
+    }
+
+    if (tab === 'private-mint') {
+      maxMint = 3;
+      document.querySelector('#mint .tab-nav .qty-selector').style.display = 'flex';
+    }
+    qty.innerHTML = maxMint.toString();
+  }
+
+  window.addEventListener('load', () => {
+    const plus = document.querySelector('#mint .plus');
+    const qty = document.querySelector('#mint .qty');
+    const minus = document.querySelector('#mint .minus');
+    const mintBtn = document.querySelector('#mint .mint-btn-container');
+    const metaConnect = document.querySelector('#mint .meta-btn-container');
+
+    document.querySelector('#tab-public-mint').addEventListener('click', () => selectTab('public-mint'));
+    document.querySelector('#tab-private-mint').addEventListener('click', () => selectTab('private-mint'));
+    document.querySelector('#tab-free-mint').addEventListener('click', () => selectTab('free-mint'));
+    metaConnect.addEventListener('click', async () => {
+      await login();
+    });
+
+    plus.addEventListener('click', () => {
+      let currentQty = parseInt(qty.innerHTML);
+      if (currentQty === maxMint) return;
+      currentQty++;
+      qty.innerHTML = currentQty.toString();
+    });
+
+    minus.addEventListener('click', () => {
+      let currentQty = parseInt(qty.innerHTML);
+      if (currentQty === 0) return;
+      currentQty--;
+      qty.innerHTML = currentQty.toString();
+    });
+
+    mintBtn.addEventListener('click', async () => {
+      let currentQty = parseInt(qty.innerHTML);
+      await mint(currentQty);
+    });
+    selectTab('public-mint');
+  });
+
+  let provider;
+  let signer;
+  let contract;
+  let maxMint = 0;
+  let tabSelected;
+  let address;
+  let abi;
+  let rank;
+</script>
