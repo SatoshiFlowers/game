@@ -107,8 +107,13 @@
       const data = JSON.parse(token);
       const response = await fetch(`/member/${data.token}`);
       const json = await response.json();
+      if (json.status === 401) {
+        window.location.replace('/auth/new');
+        return;
+      }
       $gameVariables.setValue(args.varId, json.status);
     } catch (e) {
+      console.log(e);
       $gameSwitches.setValue(args.varId, 500);
     }
   });
