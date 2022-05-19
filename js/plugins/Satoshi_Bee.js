@@ -100,6 +100,7 @@
     let isStarted = false;
     let timerLaunch = false;
     let beez = false;
+    let finished = false;
 
 
     function preload() {
@@ -211,6 +212,7 @@
     }
 
     function update() {
+      if (finished) return;
       // const percent = Phaser.Math.Clamp(value, 0, 80) / width;
 
       // NO GAME OVER
@@ -574,6 +576,7 @@
       document.body.removeChild(minigame);
       gameCanvas.classList.remove('blurry');
       $gameVariables.setValue($thisPlugin.parameters.statusVariable, 0);
+      finished = true;
     }
   })
 })();
