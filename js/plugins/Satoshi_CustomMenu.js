@@ -1,6 +1,6 @@
 //=============================================================================
-// Stamina
-// Stamina.js
+// Satoshi_CustomMenu
+// Satoshi_CustomMenu.js
 //=============================================================================
 
 
@@ -34,11 +34,14 @@
   Scene_Map.prototype.createButtons = function() {};
   Scene_MenuBase.prototype.createButtons = function() {};
 
-  const pluginName = 'Stamina';
+  const pluginName = 'Satoshi_CustomMenu';
   const $thisPlugin = this.$plugins.find(p => p.name === pluginName);
   const $web3Plugin = this.$plugins.find(p => p.name === 'Web3');
   const $discordPlugin = this.$plugins.find(p => p.name === 'Discord_Connect');
   const discordLocalStorageKey = $discordPlugin.parameters.varName;
+
+  // -------------
+  // Sprite_Gold
 
   function Sprite_Gold() {
     this.initialize(...arguments);
@@ -85,9 +88,6 @@
 
   Sprite_Gold.prototype.drawGoldIcon = function() {
     const icon = ImageManager.loadSystem("IconSet");
-    const pw = ImageManager.iconWidth;
-    const ph = ImageManager.iconHeight;
-    const sx =
     this.bitmap.blt(
       icon,
       ImageManager.iconWidth * 15,
@@ -95,7 +95,8 @@
       ImageManager.iconWidth,
       ImageManager.iconHeight,
       0,
-      0)
+      0
+    );
   }
 
   Sprite_Gold.prototype.redraw = function() {
@@ -103,6 +104,9 @@
     this.drawGoldIcon();
     this.drawAmount();
   };
+
+  // -------------
+  // Sprite_StaminaGauche
 
   function Sprite_StaminaGauge() {
     this.initialize(...arguments);
@@ -187,42 +191,60 @@
     return this.bitmap.measureTextWidth(this.label())
   };
 
-  function Window_Stamina() {
+  // ----------------
+  // Window_Status
+
+  function Window_Status() {
     this.initialize(...arguments);
   }
 
-  Window_Stamina.prototype = Object.create(Window_StatusBase.prototype);
-  Window_Stamina.prototype.constructor = Window_Stamina;
+  Window_Status.prototype = Object.create(Window_StatusBase.prototype);
+  Window_Status.prototype.constructor = Window_Status;
 
-  Window_Stamina.prototype.initialize = function() {
+  Window_Status.prototype.initialize = function() {
     Window_StatusBase.prototype.initialize.call(this, new Rectangle(0, 0, 1016, 64));
     this.refresh();
   };
 
-  Window_Stamina.prototype.refresh = function() {
+  Window_Status.prototype.refresh = function() {
     this.contents.clear();
     this.drawStamina();
     this.drawGold();
   };
 
-  Window_Stamina.prototype.drawStamina = function() {
+  Window_Status.prototype.drawStamina = function() {
     this.gauge = this.createInnerSprite("stamina-bar", Sprite_StaminaGauge);
     this.gauge.setup();
     this.gauge.move(3, 3);
     this.gauge.show();
   }
 
-  Window_Stamina.prototype.drawGold = function() {
+  Window_Status.prototype.drawGold = function() {
     this.gold = this.createInnerSprite("gold-icon", Sprite_Gold);
     this.gold.setup();
     this.gold.move(850, 5);
     this.gold.show();
   }
 
-  Window_Stamina.prototype.open = function() {
+  Window_Status.prototype.open = function() {
     this.refresh();
     Window_StatusBase.prototype.open.call(this);
   };
+
+  // -----------------
+  // Window_ItemList
+
+  function Window_ItemsList(scene) {
+    this.initialize(...arguments);
+  }
+
+  Window_ItemsList.prototype = Object.create(Window_Selectable);
+  Window_ItemsList.prototype.constructor = Window_ItemsList;
+
+  Window_ItemsList.prototype.initialize = function(scene) {
+    this._scene = scene;
+    Window_Selectable.prototype.initialize.call(this, new Rectangle(0, 70, 250, 690));
+  }
 
   function Window_SatoshiMenu(scene) {
     this.initialize(...arguments);
@@ -257,21 +279,9 @@
     Window_Selectable.prototype.cursorDown.call(this);
   }
 
-  function Window_ItemsList(scene) {
-    this.initialize(...arguments);
-  }
-
-  Window_ItemsList.prototype = Object.create(Window_Selectable);
-  Window_ItemsList.prototype.constructor = Window_ItemsList;
-
-  Window_ItemsList.prototype.initialize = function(scene) {
-    this._scene = scene;
-    Window_Selectable.prototype.initialize.call(this, new Rectangle(0, 70, 250, 690));
-  }
-
   Scene_Menu.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
-    this._staminaWindow = new Window_Stamina();
+    this._staminaWindow = new Window_Status();
     this._menuWindow = new Window_SatoshiMenu(this);
     // this._itemsWindow = new Window_ItemsList(this);
     // this._toolsWindow = new Window_ToolsList(this);
@@ -297,7 +307,7 @@
 
   PluginManager.registerCommand(pluginName, 'showStamina', () => {
     if (this._staminaOverlay !== undefined) return;
-    this._staminaOverlay = new Window_Stamina();
+    this._staminaOverlay = new Window_Status();
     SceneManager._scene.addWindow(this._staminaOverlay);
   });
 
@@ -312,7 +322,7 @@
   })
 
 
-})().then(() => console.log('Stamina loaded')).catch(e => {
+})().catch(e => {
   console.log('Could not load Stamina');
   console.error(e);
 });

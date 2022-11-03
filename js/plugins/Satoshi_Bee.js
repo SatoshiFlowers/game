@@ -49,10 +49,6 @@
     gameCanvas.classList.add('blurry');
     const minigame = document.createElement('div');
     minigame.id = 'minigame';
-    minigame.addEventListener('click', (e) => {
-      e.stopPropagation();
-      e.preventDefault();
-    });
     const beegame = document.createElement('div');
     beegame.id = 'beegame';
     minigame.appendChild(beegame);

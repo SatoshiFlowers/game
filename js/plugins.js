@@ -6,6 +6,7 @@ var $plugins =
 {"name":"Discord_Connect","status":true,"description":"[RPG Maker MZ] [DiscordConnect] [up]","parameters":{"varName":"SatoshiFlowersToken"}},
 {"name":"ethers.umd.min","status":true,"description":"","parameters":{}},
 {"name":"Web3","status":true,"description":"[RPG Maker MZ] [Web3] [up]","parameters":{"ethStatusVariable":"22"}},
-{"name":"Stamina","status":true,"description":"Manage the Stamina Bar","parameters":{"varId":"6"}},
-{"name":"Satoshi_Bee","status":true,"description":"[RPG Maker MZ] [Satoshi_Bee Minigame]","parameters":{"statusVariable":"25"}}
+{"name":"Satoshi_CustomMenu","status":true,"description":"Manage the Stamina Bar","parameters":{"varId":""}},
+{"name":"Satoshi_Bee","status":true,"description":"[RPG Maker MZ] [Satoshi_Bee Minigame]","parameters":{"statusVariable":"25"}},
+{"name":"Satoshi_AnchorEvent","status":true,"description":"Position events with custom x/y anchor","parameters":{}}
 ];
